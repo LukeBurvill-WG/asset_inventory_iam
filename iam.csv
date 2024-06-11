@@ -1,0 +1,8 @@
+Project ID,Project Number,Resource,Role,Identity
+wx-connectedx-admin-prod,65865363401,//cloudresourcemanager.googleapis.com/projects/wx-connectedx-admin-prod,roles/bigquery.dataEditor,user:jsekimori@woolworths.com.au
+wx-connectedx-admin-prod,65865363401,//cloudresourcemanager.googleapis.com/projects/wx-connectedx-admin-prod,roles/bigquery.dataEditor,user:njones8@woolworths.com.au
+wx-connectedx-admin-prod,65865363401,//cloudresourcemanager.googleapis.com/projects/wx-connectedx-admin-prod,roles/viewer,user:cbrowne1@woolworths.com.au
+wx-connectedx-admin-prod,65865363401,//cloudresourcemanager.googleapis.com/projects/wx-connectedx-admin-prod,roles/viewer,user:jsekimori@woolworths.com.au
+wx-connectedx-admin-prod,65865363401,//cloudresourcemanager.googleapis.com/projects/wx-connectedx-admin-prod,roles/viewer,user:jyap@woolworths.com.au
+wx-connectedx-admin-prod,65865363401,//cloudresourcemanager.googleapis.com/projects/wx-connectedx-admin-prod,roles/viewer,user:medwardflores@woolworths.com.au
+wx-connectedx-admin-prod,65865363401,//cloudresourcemanager.googleapis.com/projects/wx-connectedx-admin-prod,roles/viewer,user:ssriram1@woolworths.com.au
