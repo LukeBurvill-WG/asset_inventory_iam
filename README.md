@@ -15,6 +15,7 @@ Checks GCP Projects for permissions directly assigned to user identities
 ## How to Use
 
 iam_check.exe -projects project_1,project_2
+
 go run . -projects project_1,project_2
 
 
