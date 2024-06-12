@@ -8,6 +8,7 @@ import (
 	"strings"
 	"encoding/csv"
 	"os"
+	"bufio"
 
 	asset "cloud.google.com/go/asset/apiv1"
 	"cloud.google.com/go/asset/apiv1/assetpb"
@@ -16,13 +17,27 @@ import (
 	resourcemanagerpb "cloud.google.com/go/resourcemanager/apiv3/resourcemanagerpb"
 )
 
+func check(e error) {
+	if e != nil {
+		panic(e)
+	}
+}
+
 func main() {
 	projects := flag.String("projects", "", "Comma Seperate list of Project IDs to Scope the search.")
 	limit := flag.Int("limit", 0, "Limit the number of projects to query")
+	ingestFile := flag.String("file", "", "Name of file in the same folder that contains a list of projects to process")
+	output := flag.String("output", "", "Name of output file. Automatically adds .csv")
 	flag.Parse()
 
 	project_list := *projects
 	project_limit := *limit
+	project_file := *ingestFile
+	output_file := *output
+
+	if project_list != "" && project_file != "" {
+		log.Fatal("Supply only a list of projects or a file containing a list of projects.")
+	}
 
 	all_projects := map[string]string{}
 
@@ -48,8 +63,19 @@ func main() {
 
 	var project_array []string
 	if project_list == "" {
-		for _, v := range all_projects {
-			project_array = append(project_array, v)
+		if project_file == "" {
+			for _, v := range all_projects {
+				project_array = append(project_array, v)
+			}
+		} else {
+			file, err := os.Open(project_file)
+			check(err)
+			defer file.Close()
+
+			scanner := bufio.NewScanner(file)
+			for scanner.Scan() {
+				project_array = append(project_array, scanner.Text())
+			}
 		}
 		project_list = strings.Join(project_array, ",")
 	}
@@ -101,7 +127,11 @@ func main() {
 		}
 	}
 
-	file, err := os.Create("iam.csv")
+	if output_file == "" {
+		output_file = "iam"
+	}
+
+	file, err := os.Create(output_file + ".csv")
 	if err != nil {
 		log.Fatalf("Failed creating file: %s", err)
 	}
